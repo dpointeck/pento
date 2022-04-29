@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%= csrf_meta_tag() %>
+    <%= live_title_tag assigns[:page_title] || "Pento", suffix: " · Phoenix Framework" %>
+    <style>
+     @font-face {
+        font-family: Inter;
+        src: url(/fonts/Inter/Inter-Thin.woff2), url(/fonts/Inter/Inter-Thin.woff);
+        font-weight: 100;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: Inter;
+        src: url(/fonts/Inter/Inter-ExtraLight.woff2),
+          url(/fonts/Inter/Inter-ExtraLight.woff);
+        font-weight: 200;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: Inter;
+        src: url(/fonts/Inter/Inter-Light.woff2), url(/fonts/Inter/Inter-Light.woff);
+        font-weight: 300;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: Inter;
+        src: url(/fonts/Inter/Inter-Regular.woff2),
+          url(/fonts/Inter/Inter-Regular.woff);
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: Inter;
+        src: url(/fonts/Inter/Inter-Medium.woff2),
+          url(/fonts/Inter/Inter-Medium.woff);
+        font-weight: 500;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: Inter;
+        src: url(/fonts/Inter/Inter-SemiBold.woff2),
+          url(/fonts/Inter/Inter-SemiBold.woff);
+        font-weight: 600;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: Inter;
+        src: url(/fonts/Inter/Inter-Bold.woff2), url(/fonts/Inter/Inter-Bold.woff);
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: Inter;
+        src: url(/fonts/Inter/Inter-ExtraBold.woff2),
+          url(/fonts/Inter/Inter-ExtraBold.woff);
+        font-weight: 800;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: Inter;
+        src: url(/fonts/Inter/Inter-Black.woff2), url(/fonts/Inter/Inter-Black.woff);
+        font-weight: 900;
+        font-style: normal;
+      }
+    </style>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+  </head>
+  <body>
+    <header class="mt-12">
+      <section class="flex flex-wrap justify-center">
+        <a href="https://phoenixframework.org/" class="max-w-[300px]">
+          <img src={Routes.static_path(@conn, "/images/phoenix.png")} alt="Phoenix Framework Logo"/>
+        </a>
+        <nav class="w-full flex justify-center mt-8">
+          <ul class="flex gap-6">
+              <li class="px-3 py-2 bg-gray-200 rounded transition-colors hover:bg-gray-100"><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
+              <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+              <li class="px-3 py-2 bg-gray-200 rounded transition-colors hover:bg-gray-100"><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+              <% end %>
+          </ul>
+        </nav>
+      </section>
+    </header>
+    <%= @inner_content %>
+  </body>
+</html>
