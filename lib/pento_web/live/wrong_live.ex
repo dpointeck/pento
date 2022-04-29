@@ -1,7 +1,7 @@
 defmodule PentoWeb.WrongLive do
   use Phoenix.LiveView, layout: {PentoWeb.LayoutView, "live.html"}
 
-  def handle_event("guess",%{"number" => guess}, socket) do
+  def handle_event("guess", %{"number" => guess}, socket) do
     time = time()
     guess = String.to_integer(guess)
     random_number = socket.assigns.random_number
@@ -23,6 +23,7 @@ defmodule PentoWeb.WrongLive do
           socket.assigns.score
         end
       end
+
     {
       :noreply,
       assign(
@@ -35,11 +36,30 @@ defmodule PentoWeb.WrongLive do
     }
   end
 
+  def handle_event("reset", _value, socket) do
+    random_number = Enum.random(1..10)
+
+    {
+      :noreply,
+      assign(
+        socket,
+        guess: 0,
+        random_number: random_number
+      )
+    }
+  end
+
   def mount(_params, _session, socket) do
     random_number = Enum.random(1..10)
 
     {:ok,
-     assign(socket, time: time(), message: "Make a guess:", score: 0, random_number: random_number, guess: -1)}
+     assign(socket,
+       time: time(),
+       message: "Make a guess:",
+       score: 0,
+       random_number: random_number,
+       guess: -1
+     )}
   end
 
   def time() do
@@ -53,17 +73,37 @@ defmodule PentoWeb.WrongLive do
       <h2>Random Number: <%= @random_number %></h2>
       <h2 class= "mt-6 text-3xl">
         <%= @message %>
-        It's <%= @time %>
       </h2>
       <h2>
-        <span>guess: <%= @guess %></span>
         <div class="flex gap-4 mt-4">
           <%= if @random_number != @guess do %>
             <%= for n <- 1..10 do %>
-              <a class="h-[40px] w-[40px] flex items-center justify-center rounded bg-gray-100 transition-colors hover:bg-gray-50" href="#" phx-click="guess" phx-value-number= {n} ><%= n %></a>
+              <a class="h-[40px]
+              w-[40px]
+              flex
+              items-center
+              justify-center
+              rounded
+              bg-gray-100
+              transition-colors
+              hover:bg-gray-50"
+              href="#"
+              phx-click="guess"
+              phx-value-number={n}><%= n %></a>
             <% end %>
           <% else %>
-            <button>Reset</button>
+            <button
+            type="button"
+            phx-click="reset"
+            class="bg-gray-800
+              text-white
+              font-light
+              py-2
+              px-5
+              rounded
+              hover:bg-gray-600
+              active:bg-gray-700
+              transition-colors">Reset</button>
           <% end %>
         </div>
       </h2>

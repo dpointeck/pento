@@ -1,0 +1,25 @@
+{
+  // elixir
+  "elixirLS.suggestSpecs": false,
+  "elixirLS.dialyzerEnabled": true,
+  "elixirLS.signatureAfterComplete": false,
+  "elixirLS.fetchDeps": false,
+  "[phoenix-heex]": {
+    "editor.defaultFormatter": "RoyalMist.vscode-eex-format"
+  },
+  "emmet.includeLanguages": {
+    "html-eex": "html",
+    "elixir": "html",
+    "HTML (Eex)": "html",
+    "phoenix-heex": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "tailwindCSS.includeLanguages": {
+    "phoenix-heex": "html"
+  },
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 3,
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
